@@ -27,6 +27,7 @@ import org.springframework.web.context.request.WebRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,14 +46,17 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        logger.info(ex.getClass().getName());
         String message = ex.getBindingResult().getFieldErrors().stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
                 .collect(Collectors.joining(" "));
-        ExceptionResponse exceptionResponse = new ExceptionResponse(message, request.getDescription(false), LocalDateTime.now());
-        return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
+        ExceptionResponse res = new ExceptionResponse(
+                request.getDescription(false),
+                ex.getMessage(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
     }
     /*
+
     @ExceptionHandler ({ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Object> handleConstraintViolationException(
