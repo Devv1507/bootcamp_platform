@@ -1,4 +1,4 @@
-package powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions;
+package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
 import lombok.Getter;
 import lombok.Setter;

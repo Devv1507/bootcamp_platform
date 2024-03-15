@@ -25,10 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.WebDataBinder;
-
-
-import javax.validation.Valid;
 import java.util.List;
+import javax.validation.Valid;
 
 @Validated
 @RestController

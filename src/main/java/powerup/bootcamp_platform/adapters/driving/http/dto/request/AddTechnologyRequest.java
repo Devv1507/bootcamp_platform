@@ -1,15 +1,12 @@
 package powerup.bootcamp_platform.adapters.driving.http.dto.request;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import powerup.bootcamp_platform.adapters.driving.http.controllers.TechnologyRestControllerAdapter;
 import powerup.bootcamp_platform.domain.api.ITechnologyServicePort;
+import javax.validation.constraints.*;
 
 @AllArgsConstructor
 @Getter

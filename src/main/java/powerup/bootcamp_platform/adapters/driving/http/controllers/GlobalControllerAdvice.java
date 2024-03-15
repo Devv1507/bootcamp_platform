@@ -1,15 +1,16 @@
-package powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions;
+package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
 import org.springframework.beans.TypeMismatchException;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.http.HttpHeaders;
-import java.util.ArrayList;
-import org.springframework.validation.ObjectError;
 
 
+import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.ElementNotFoundException;
+import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.NoDataFoundException;
+import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.TechnologyAlreadyExistsException;
 import powerup.bootcamp_platform.configuration.Constants;
 import powerup.bootcamp_platform.domain.exceptions.EmptyFieldException;
 import powerup.bootcamp_platform.domain.exceptions.NegativeValuesException;
@@ -19,18 +20,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.validation.FieldError;
 
 
 import org.springframework.web.context.request.WebRequest;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-@Order(Ordered.HIGHEST_PRECEDENCE)
+import static java.util.stream.Collectors.toList;
+
+@RestControllerAdvice
 @ControllerAdvice
 @RequiredArgsConstructor
 public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
@@ -47,6 +51,12 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
                 .collect(Collectors.joining(" "));
         ExceptionResponse exceptionResponse = new ExceptionResponse(message, request.getDescription(false), LocalDateTime.now());
         return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler ({ConstraintViolationException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ResponseEntity<Object> handleConstraintViolationException(
+            ConstraintViolationException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     @Override
     protected ResponseEntity<Object> handleTypeMismatch(

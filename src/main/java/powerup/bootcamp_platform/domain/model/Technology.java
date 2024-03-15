@@ -1,6 +1,5 @@
 package powerup.bootcamp_platform.domain.model;
 
-import jakarta.validation.constraints.NotBlank;
 import powerup.bootcamp_platform.domain.exceptions.EmptyFieldException;
 import powerup.bootcamp_platform.domain.util.DomainConstants;
 import static java.util.Objects.requireNonNull;

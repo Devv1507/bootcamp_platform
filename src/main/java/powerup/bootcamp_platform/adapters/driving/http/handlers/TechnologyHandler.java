@@ -2,7 +2,6 @@ package powerup.bootcamp_platform.adapters.driving.http.handlers;
 
 
 import org.springframework.validation.Errors;
-import javax.validation.Validator;
 import powerup.bootcamp_platform.adapters.driving.http.dto.request.AddTechnologyRequest;/*
 public class ExampleValidation implements Validator {
     @Override
