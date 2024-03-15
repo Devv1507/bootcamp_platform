@@ -28,7 +28,6 @@ import org.springframework.web.bind.WebDataBinder;
 import java.util.List;
 import javax.validation.Valid;
 
-@Validated
 @RestController
 @RequestMapping("/technologies")
 @RequiredArgsConstructor

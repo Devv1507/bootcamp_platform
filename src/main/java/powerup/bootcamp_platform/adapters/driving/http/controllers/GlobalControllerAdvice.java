@@ -52,12 +52,14 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
         ExceptionResponse exceptionResponse = new ExceptionResponse(message, request.getDescription(false), LocalDateTime.now());
         return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+    /*
     @ExceptionHandler ({ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Object> handleConstraintViolationException(
             ConstraintViolationException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
+     */
     @Override
     protected ResponseEntity<Object> handleTypeMismatch(
             TypeMismatchException ex,
