@@ -2,7 +2,7 @@ package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
 import org.apache.logging.log4j.message.Message;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.validation.annotation.Validated;
 import powerup.bootcamp_platform.adapters.driving.http.dto.request.AddTechnologyRequest;
 import powerup.bootcamp_platform.adapters.driving.http.dto.request.UpdateTechnologyRequest;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.validation.BindingResult;
 import java.util.List;
 import javax.validation.Valid;
 

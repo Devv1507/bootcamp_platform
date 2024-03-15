@@ -29,6 +29,7 @@ import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -38,7 +39,15 @@ import static java.util.stream.Collectors.toList;
 @RestControllerAdvice
 @ControllerAdvice
 @RequiredArgsConstructor
-public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
+public class GlobalControllerAdvice {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("error", ex);
+        return new ResponseEntity<>(body, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    /*
     // 400 Bad Request
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -55,6 +64,7 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
                 LocalDateTime.now());
         return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
     }
+     */
     /*
 
     @ExceptionHandler ({ConstraintViolationException.class})
@@ -64,6 +74,7 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
      */
+    /*
     @Override
     protected ResponseEntity<Object> handleTypeMismatch(
             TypeMismatchException ex,
@@ -75,6 +86,9 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
         final ExceptionResponse exceptionResponse = new ExceptionResponse(error, request.getDescription(false), LocalDateTime.now());
         return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+
+    */
     @ExceptionHandler(EmptyFieldException.class)
     public ResponseEntity<ExceptionResponse> handleEmptyFieldException(EmptyFieldException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(
