@@ -17,9 +17,9 @@ public class TechnologyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column (unique = true, nullable = false)
+    @Column (unique = true/*, nullable = false, length = 50*/)
     private String name;
-    @Column (nullable = false)
+    @Column (nullable = false/*, length = 90*/)
     private String description;
     private String address;
 }

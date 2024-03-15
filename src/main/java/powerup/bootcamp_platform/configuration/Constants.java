@@ -11,4 +11,5 @@ public class Constants {
     public static final String EMPTY_FIELD_EXCEPTION_MESSAGE = "Field %s can not be empty";
     public static final String NEGATIVE_NOT_ALLOWED_EXCEPTION_MESSAGE = "Field %s can not receive negative values";
     public static final String ADDRESS_NOT_FOUND_EXCEPTION_MESSAGE = "The address indicated for this product does not exist";
+    public static final String METHOD_NOT_ALLOWED_EXCEPTION_MESSAGE = "Field %s can not be in such format";
 }

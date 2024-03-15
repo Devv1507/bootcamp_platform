@@ -9,13 +9,8 @@ import java.util.Optional;
 
 
 public interface ITechnologyRepository extends JpaRepository<TechnologyEntity, Long> {
-    /*
-    @Query("SELECT COUNT(t) > 0 FROM TechnologyEntity t WHERE t.name = :name")
-    boolean existsByName(String name);
-    Optional<TechnologyEntity> save(TechnologyEntity technologyEntity);
-     */
-    Optional<TechnologyEntity> findByNameContaining(String name);
     Optional<TechnologyEntity> findByName(String name); // abstract method to apply to different models
+    Optional<TechnologyEntity> findByNameContaining(String name);
     Page<TechnologyEntity> findAll(Pageable pageable);  // Implement pagination using Pageable interface
     Page<TechnologyEntity> findAllByAddress(String address, Pageable pageable);
 

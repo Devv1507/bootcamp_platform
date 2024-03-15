@@ -1,7 +1,9 @@
 package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import powerup.bootcamp_platform.adapters.driven.jpa.mysql.entities.TechnologyEntity;
+import org.apache.logging.log4j.message.Message;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import powerup.bootcamp_platform.adapters.driving.http.dto.request.AddTechnologyRequest;
 import powerup.bootcamp_platform.adapters.driving.http.dto.request.UpdateTechnologyRequest;
 import powerup.bootcamp_platform.adapters.driving.http.dto.response.TechnologyResponse;
@@ -22,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/technologies")
 @RequiredArgsConstructor
@@ -34,7 +36,10 @@ public class TechnologyRestControllerAdapter {
     private final ITechnologyResponseMapper technologyResponseMapper;
 
     @PostMapping("/")
-    public ResponseEntity<Void> addTechnology(@RequestBody @Valid AddTechnologyRequest request) {
+    public ResponseEntity<Void> addTechnology(@Valid @RequestBody AddTechnologyRequest request, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){ // to probe at least to send something
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         technologyServicePort.saveTechnology(technologyRequestMapper.addRequestToTechnology(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
