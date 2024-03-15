@@ -6,6 +6,7 @@ import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.NoDataFoun
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.TechnologyAlreadyExistsException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.mapper.ITechnologyEntityMapper;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.repositories.ITechnologyRepository;
+import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.GlobalControllerAdvice;
 import powerup.bootcamp_platform.domain.model.Technology;
 import powerup.bootcamp_platform.domain.spi.ITechnologyPersistencePort;
 import lombok.RequiredArgsConstructor;

@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.WebDataBinder;
+
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -42,6 +46,10 @@ public class TechnologyRestControllerAdapter {
         }
         technologyServicePort.saveTechnology(technologyRequestMapper.addRequestToTechnology(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @InitBinder
+    void initBinder(WebDataBinder binder) {
+        binder.setAllowedFields("addRequestToTechnology", "updateRequestToTechnology");
     }
     @GetMapping("/search/{technologyName}")
     public ResponseEntity<TechnologyResponse> getTechnology(@PathVariable String technologyName) {
