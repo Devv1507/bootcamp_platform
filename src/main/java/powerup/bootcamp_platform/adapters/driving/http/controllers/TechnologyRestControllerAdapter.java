@@ -47,10 +47,12 @@ public class TechnologyRestControllerAdapter {
         technologyServicePort.saveTechnology(technologyRequestMapper.addRequestToTechnology(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    /*
     @InitBinder
     void initBinder(WebDataBinder binder) {
         binder.setAllowedFields("addRequestToTechnology", "updateRequestToTechnology");
     }
+     */
     @GetMapping("/search/{technologyName}")
     public ResponseEntity<TechnologyResponse> getTechnology(@PathVariable String technologyName) {
         return ResponseEntity.ok(technologyResponseMapper.toTechnologyResponse(technologyServicePort.getTechnology(technologyName)));
