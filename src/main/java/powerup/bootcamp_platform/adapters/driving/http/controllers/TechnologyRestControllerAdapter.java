@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.validation.BindingResult;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -38,10 +37,7 @@ public class TechnologyRestControllerAdapter {
     private final ITechnologyResponseMapper technologyResponseMapper;
 
     @PostMapping("/")
-    public ResponseEntity<Void> addTechnology(@Valid @RequestBody AddTechnologyRequest request, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){ // to probe at least to send something
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+    public ResponseEntity<Void> addTechnology(@Valid @RequestBody AddTechnologyRequest request) {
         technologyServicePort.saveTechnology(technologyRequestMapper.addRequestToTechnology(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

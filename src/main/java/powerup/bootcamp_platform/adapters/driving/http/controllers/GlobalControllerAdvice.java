@@ -39,7 +39,8 @@ import static java.util.stream.Collectors.toList;
 @RestControllerAdvice
 @ControllerAdvice
 @RequiredArgsConstructor
-public class GlobalControllerAdvice {
+public class GlobalControllerAdvice extends ResponseEntityExceptionHandler{
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
         Map<String, Object> body = new HashMap<>();
@@ -47,7 +48,9 @@ public class GlobalControllerAdvice {
         return new ResponseEntity<>(body, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    /*
+
+
+/*
     // 400 Bad Request
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -64,7 +67,9 @@ public class GlobalControllerAdvice {
                 LocalDateTime.now());
         return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
     }
-     */
+
+ */
+
     /*
 
     @ExceptionHandler ({ConstraintViolationException.class})
