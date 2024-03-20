@@ -6,7 +6,7 @@ import java.util.List;
 public interface ITechnologyPersistencePort {
     void saveTechnology(Technology technology);
     Technology getTechnology(String name);
-    List<Technology> getAllTechnologies(int page, int size, String sortOrder); // Implement pagination
+    List<Technology> getAllTechnologies(int page, int size, boolean ascTrue); // Implement pagination
     List<Technology> getAllTechnologiesByAddress(String address, Integer page, Integer size);
     Technology updateTechnology(Technology technology);
     void deleteTechnology(Long id);

@@ -1,56 +1,28 @@
 package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
-import org.springframework.beans.TypeMismatchException;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.springframework.http.HttpHeaders;
-
-
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.ElementNotFoundException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.NoDataFoundException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.TechnologyAlreadyExistsException;
 import powerup.bootcamp_platform.configuration.Constants;
 import powerup.bootcamp_platform.domain.exceptions.EmptyFieldException;
 import powerup.bootcamp_platform.domain.exceptions.NegativeValuesException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-
-
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.context.request.WebRequest;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static java.util.stream.Collectors.toList;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import lombok.RequiredArgsConstructor;
 
 @RestControllerAdvice
 @ControllerAdvice
 @RequiredArgsConstructor
 public class GlobalControllerAdvice extends ResponseEntityExceptionHandler{
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("error", ex);
-        return new ResponseEntity<>(body, HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
-
-
-/*
     // 400 Bad Request
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -63,12 +35,10 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler{
                 .collect(Collectors.joining(" "));
         ExceptionResponse res = new ExceptionResponse(
                 request.getDescription(false),
-                ex.getMessage(),
+                message,
                 LocalDateTime.now());
         return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
     }
-
- */
 
     /*
 

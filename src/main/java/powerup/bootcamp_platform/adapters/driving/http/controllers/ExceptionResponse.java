@@ -1,18 +1,13 @@
 package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.List;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @RequiredArgsConstructor
 public class ExceptionResponse {
     private final String message;
@@ -22,7 +17,6 @@ public class ExceptionResponse {
 
     // to validation purpose
     @Getter
-    @Setter
     @RequiredArgsConstructor
     private static class ValidationError {
         private final String field;

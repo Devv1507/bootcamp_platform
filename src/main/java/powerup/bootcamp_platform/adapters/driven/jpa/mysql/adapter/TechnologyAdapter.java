@@ -1,5 +1,6 @@
 package powerup.bootcamp_platform.adapters.driven.jpa.mysql.adapter;
 
+import org.springframework.data.domain.Sort;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.entities.TechnologyEntity;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.ElementNotFoundException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.NoDataFoundException;
@@ -31,9 +32,15 @@ public class TechnologyAdapter implements ITechnologyPersistencePort{
         return technologyEntityMapper.toModel(technology);
     }
     @Override
-    public List<Technology> getAllTechnologies(int page, int size, String sortOrder) {
-        Pageable pagination = PageRequest.of(page, size);
-        List<TechnologyEntity> tecnologies = technologyRepository.findAll(pagination).getContent();
+    public List<Technology> getAllTechnologies(int page, int size, boolean ascTrue) {
+        Sort sort;
+        if (ascTrue) {
+            sort = Sort.by("name");
+        } else {
+            sort = Sort.by("name").descending();
+        }
+        Pageable paging = PageRequest.of(page, size, sort);
+        List<TechnologyEntity> tecnologies = technologyRepository.findAll(paging).getContent();
         if (tecnologies.isEmpty()) {
             throw new NoDataFoundException();
         }

@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.WebDataBinder;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -41,20 +39,15 @@ public class TechnologyRestControllerAdapter {
         technologyServicePort.saveTechnology(technologyRequestMapper.addRequestToTechnology(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    /*
-    @InitBinder
-    void initBinder(WebDataBinder binder) {
-        binder.setAllowedFields("addRequestToTechnology", "updateRequestToTechnology");
-    }
-     */
+
     @GetMapping("/search/{technologyName}")
     public ResponseEntity<TechnologyResponse> getTechnology(@PathVariable String technologyName) {
         return ResponseEntity.ok(technologyResponseMapper.toTechnologyResponse(technologyServicePort.getTechnology(technologyName)));
     }
     @GetMapping("/")
-    public ResponseEntity<List<TechnologyResponse>> getAllTechnologies(@RequestParam Integer page, @RequestParam (defaultValue = "15") Integer size, @RequestParam String sortOrder) {
+    public ResponseEntity<List<TechnologyResponse>> getAllTechnologies(@RequestParam Integer page, @RequestParam (defaultValue = "15") Integer size, @RequestParam boolean ascTrue) {
         return ResponseEntity.ok(technologyResponseMapper.
-                toTechnologyResponseList(technologyServicePort.getAllTechnologies(page, size, sortOrder)));
+                toTechnologyResponseList(technologyServicePort.getAllTechnologies(page, size, ascTrue)));
     }
     @PutMapping("/")
     public ResponseEntity<TechnologyResponse> updateTechnology(@RequestBody UpdateTechnologyRequest request) {
