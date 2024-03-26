@@ -1,12 +1,12 @@
 package powerup.bootcamp_platform.domain.model;
 
-public class Profile {
+public class Capability {
     private Long id;
     private String name;
     private String description;
     private Technology technology;
 
-    public Profile(Long id, String name, String description, Technology technology) {
+    public Capability(Long id, String name, String description, Technology technology) {
         this.id = id;
         this.name = name;
         this.description = description;

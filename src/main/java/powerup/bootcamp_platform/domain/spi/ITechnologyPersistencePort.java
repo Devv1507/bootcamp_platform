@@ -6,8 +6,13 @@ import java.util.List;
 public interface ITechnologyPersistencePort {
     void saveTechnology(Technology technology);
     Technology getTechnology(String name);
-    List<Technology> getAllTechnologies(int page, int size, boolean ascTrue); // Implement pagination
-    List<Technology> getAllTechnologiesByAddress(String address, Integer page, Integer size);
+    List<Technology> getAllTechnologies(/*Integer page, Integer size*/); // Implement pagination
+
+    List<Technology> getAllTechnologiesPaged(Integer page, Integer size, String sortField);
+
+
+
+
     Technology updateTechnology(Technology technology);
     void deleteTechnology(Long id);
 }

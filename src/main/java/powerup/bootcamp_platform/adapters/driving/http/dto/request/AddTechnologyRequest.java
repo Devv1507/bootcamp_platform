@@ -1,7 +1,8 @@
 package powerup.bootcamp_platform.adapters.driving.http.dto.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;import javax.validation.constraints.*;
+import lombok.Getter;
+import javax.validation.constraints.*;
 
 @AllArgsConstructor
 @Getter
@@ -15,5 +16,4 @@ public class AddTechnologyRequest {
         @Size(max = 90, message = "Description should not exceed 90 characters")
         @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Description should only contain alphanumeric characters")
         private String description;
-        private String address;
 }

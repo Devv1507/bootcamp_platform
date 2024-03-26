@@ -4,15 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "technology")
+@Table(name = "capability")
+@NoArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor // nedded to get a default constructor
-@Getter //@HashCode!!!
+@Getter
 @Setter
-public class TechnologyEntity {
+public class CapabilityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,4 +21,6 @@ public class TechnologyEntity {
     private String name;
     @Column (nullable = false, length = 90)
     private String description;
+    @Column (nullable = false)
+    private String technologies; // must be a list
 }

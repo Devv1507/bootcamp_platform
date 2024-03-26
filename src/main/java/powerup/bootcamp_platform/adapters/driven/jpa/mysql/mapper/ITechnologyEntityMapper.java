@@ -11,12 +11,11 @@ public interface ITechnologyEntityMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
-    @Mapping(source = "address", target = "address")
     TechnologyEntity toEntity(Technology technology);
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
-    @Mapping(source = "address", target = "address")
     Technology toModel(TechnologyEntity technologyEntity);
+
     List<Technology> toModelList(List<TechnologyEntity> technologyEntities);
 }

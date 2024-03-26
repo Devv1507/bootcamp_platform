@@ -1,5 +1,6 @@
 package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.ElementNotFoundException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.NoDataFoundException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.TechnologyAlreadyExistsException;
@@ -63,7 +64,18 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler{
     }
 
 
+
     */
+
+    @ExceptionHandler (value = { IllegalArgumentException.class, IllegalStateException.class })
+    protected ResponseEntity<Object> unsupportedMediaTypeException(
+            RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = Constants.METHOD_NOT_ALLOWED_EXCEPTION_MESSAGE; // needed some final fixs
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.CONFLICT, request);
+    }
+
+
     @ExceptionHandler(EmptyFieldException.class)
     public ResponseEntity<ExceptionResponse> handleEmptyFieldException(EmptyFieldException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(

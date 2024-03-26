@@ -1,9 +1,5 @@
 package powerup.bootcamp_platform.domain.model;
 
-import powerup.bootcamp_platform.domain.exceptions.EmptyFieldException;
-import powerup.bootcamp_platform.domain.util.DomainConstants;
-import static java.util.Objects.requireNonNull;
-
 public class Technology {
     private Long id;
     /* this is ok? */
@@ -54,26 +50,3 @@ public class Technology {
         this.address = address;
     }
 }
-
-/*
-
-        if (name.length() > 50) {
-            throw new IllegalArgumentException("Technology name cannot exceed 50 characters.");
-        }
-        if (description.length() > 90) {
-            throw new IllegalArgumentException("Technology description cannot exceed 90 characters.");
-        }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Technology technology = (Technology) o;
-        return Objects.equals(name, technology.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
- */

@@ -1,6 +1,11 @@
 package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
 import org.apache.logging.log4j.message.Message;
+import org.springframework.core.annotation.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import org.springframework.validation.annotation.Validated;
@@ -22,8 +27,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import powerup.bootcamp_platform.domain.model.Technology;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 
 @RestController
@@ -44,11 +52,24 @@ public class TechnologyRestControllerAdapter {
     public ResponseEntity<TechnologyResponse> getTechnology(@PathVariable String technologyName) {
         return ResponseEntity.ok(technologyResponseMapper.toTechnologyResponse(technologyServicePort.getTechnology(technologyName)));
     }
-    @GetMapping("/")
-    public ResponseEntity<List<TechnologyResponse>> getAllTechnologies(@RequestParam Integer page, @RequestParam (defaultValue = "15") Integer size, @RequestParam boolean ascTrue) {
+    @GetMapping
+    public ResponseEntity<List<TechnologyResponse>> getAllTechnologies(
+            /*@RequestParam Integer page,
+            @RequestParam (defaultValue = "15") Integer size
+            @RequestParam (defaultValue = "ASC") String sort*/ ) {
         return ResponseEntity.ok(technologyResponseMapper.
-                toTechnologyResponseList(technologyServicePort.getAllTechnologies(page, size, ascTrue)));
+                toTechnologyResponseList(technologyServicePort.getAllTechnologies(/*page, size*/)));
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<TechnologyResponse>> getAllTechnologiesPaged(
+            @RequestParam (defaultValue = "0") Integer page,
+            @RequestParam (defaultValue = "15") Integer size,
+            @RequestParam (defaultValue = "ASC") String sort) {
+        return ResponseEntity.ok(technologyResponseMapper.
+                toTechnologyResponseList(technologyServicePort.getAllTechnologiesPaged(page, size, sort)));
+    }
+
     @PutMapping("/")
     public ResponseEntity<TechnologyResponse> updateTechnology(@RequestBody UpdateTechnologyRequest request) {
         return ResponseEntity.ok(technologyResponseMapper.toTechnologyResponse(

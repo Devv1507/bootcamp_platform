@@ -15,4 +15,7 @@ public interface ITechnologyRequestMapper {
     Technology addRequestToTechnology(AddTechnologyRequest addTechnologyRequest);
     @Mapping(target = "id", source = "id")
     Technology updateRequestToTechnology(UpdateTechnologyRequest updateTechnologyRequest);
+
 }
+
+

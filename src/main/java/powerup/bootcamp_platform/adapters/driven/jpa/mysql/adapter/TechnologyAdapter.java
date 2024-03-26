@@ -1,5 +1,6 @@
 package powerup.bootcamp_platform.adapters.driven.jpa.mysql.adapter;
 
+import org.mapstruct.ObjectFactory;
 import org.springframework.data.domain.Sort;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.entities.TechnologyEntity;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.ElementNotFoundException;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class TechnologyAdapter implements ITechnologyPersistencePort{
@@ -28,32 +30,57 @@ public class TechnologyAdapter implements ITechnologyPersistencePort{
     }
     @Override
     public Technology getTechnology(String name) {
-        TechnologyEntity technology = technologyRepository.findByNameContaining(name).orElseThrow(ElementNotFoundException::new);
+        TechnologyEntity technology = technologyRepository.findByName(name).orElseThrow(ElementNotFoundException::new);
         return technologyEntityMapper.toModel(technology);
     }
-    @Override
-    public List<Technology> getAllTechnologies(int page, int size, boolean ascTrue) {
-        Sort sort;
-        if (ascTrue) {
-            sort = Sort.by("name");
-        } else {
-            sort = Sort.by("name").descending();
+
+    /*@Override
+    public List<Technology> getAllTechnologies(int offset, int size, String sortField) {
+        // Input validation
+        if (offset < 0 || size <= 0 || sortField == null) {
+            throw new IllegalArgumentException("Invalid pagination or sort parameters");
         }
-        Pageable paging = PageRequest.of(page, size, sort);
-        List<TechnologyEntity> tecnologies = technologyRepository.findAll(paging).getContent();
-        if (tecnologies.isEmpty()) {
+        // Create a Sort object based on sort
+         Sort sortObject = sortField.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by("name").ascending(): Sort.by("name").descending();
+        //Sort sortObject = (sort.equalsIgnoreCase("ASC")) ? Sort.by("name") : Sort.by("name").descending();
+        // Create Pageable object with sorting
+        Pageable paging = PageRequest.of(offset, size, sortObject);
+        // Retrieve paginated and sorted technologies
+        List<TechnologyEntity> tecnologiesSortingPaging = technologyRepository.findAll(paging).getContent();
+        // Handle empty list
+        if (tecnologiesSortingPaging.isEmpty()) {
             throw new NoDataFoundException();
         }
-        return technologyEntityMapper.toModelList(tecnologies);
+        // Convert entities to models and return
+        return technologyEntityMapper.toModelList(tecnologiesSortingPaging);
+    }*/
+    @Override
+    public List<Technology> getAllTechnologies(/*Integer page, Integer size*/) {
+        /*Pageable paging = PageRequest.of(page, size);*/
+        /*List<TechnologyEntity> technologiesPaged = technologyRepository.findAll(paging).stream();
+        if (technologiesPaged.isEmpty()) {
+            throw new NoDataFoundException();
+        }*/
+        List<TechnologyEntity> technologies = technologyRepository.findAll();
+        return technologyEntityMapper.toModelList(technologies);
+
     }
     @Override
-    public List<Technology> getAllTechnologiesByAddress(String address, Integer page, Integer size) {
-        Pageable pagination = PageRequest.of(page, size);
-        List<TechnologyEntity> products = technologyRepository.findAllByAddress(address, pagination).getContent();
-        if (products.isEmpty()) {
+    public List<Technology> getAllTechnologiesPaged(Integer page, Integer size, String sort) {
+        // Input validation
+        if (page < 0 || size <= 0) {
+            throw new IllegalArgumentException("Invalid pagination parameters");
+        }
+        // Create a Sort object based on sort
+        Sort sortObject = sort.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by("name").ascending(): Sort.by("name").descending();
+        // Create Pageable object with sorting
+        Pageable paging = PageRequest.of(page, size, sortObject);
+        // Retrieve paginated and sorted technologies
+        List<TechnologyEntity> technologies = technologyRepository.findAll(paging).getContent();
+        if (technologies.isEmpty()) {
             throw new NoDataFoundException();
         }
-        return technologyEntityMapper.toModelList(products);
+        return technologyEntityMapper.toModelList(technologies);
     }
     @Override
     public Technology updateTechnology(Technology technology) {

@@ -13,5 +13,5 @@ import java.util.List;
 public interface ITechnologyResponseMapper {
     @Mapping(source = "id", target = "id")
     TechnologyResponse toTechnologyResponse(Technology technology);
-    List<TechnologyResponse> toTechnologyResponseList(List<Technology> technologiesList);
+    List<TechnologyResponse> toTechnologyResponseList(List<Technology> technologies);
 }

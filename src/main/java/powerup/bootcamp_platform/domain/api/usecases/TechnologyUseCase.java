@@ -11,21 +11,30 @@ public class TechnologyUseCase implements ITechnologyServicePort {
         this.technologyPersistencePort = technologyPersistencePort;
     }
     @Override
-    public Technology getTechnology(String name){
-        return technologyPersistencePort.getTechnology(name);
-    }
-    @Override
     public void saveTechnology(Technology technology) {
         technologyPersistencePort.saveTechnology(technology);
     }
     @Override
-    public List<Technology>  getAllTechnologies(Integer page, Integer size, boolean ascTrue) {
-        return technologyPersistencePort.getAllTechnologies(page, size, ascTrue);
+    public Technology getTechnology(String name){
+        return technologyPersistencePort.getTechnology(name);
     }
+    /*@Override
+    public List<Technology>  getAllTechnologies(Integer page, Integer size, String sort) {
+        return technologyPersistencePort.getAllTechnologies(page, size, sort);
+    }*/
     @Override
-    public List<Technology>  getAllTechnologiesByAddress(String address, Integer page, Integer size) {
-        return technologyPersistencePort.getAllTechnologiesByAddress(address, page, size);
+    public List<Technology>  getAllTechnologies(/*Integer page, Integer size*/) {
+        return technologyPersistencePort.getAllTechnologies(/*page, size*/);
     }
+
+    @Override
+    public List<Technology>  getAllTechnologiesPaged(Integer page, Integer size, String sort) {
+        return technologyPersistencePort.getAllTechnologiesPaged(page, size, sort);
+    }
+
+
+
+
     @Override
     public Technology updateTechnology(Technology technology){
         return technologyPersistencePort.updateTechnology(technology);
