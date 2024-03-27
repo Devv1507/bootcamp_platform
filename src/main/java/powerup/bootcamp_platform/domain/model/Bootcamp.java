@@ -8,17 +8,15 @@ public class Bootcamp {
     private Long id;
     private String name;
     private Capability capability;
-    private User user;
     private String urlMeet;
 
-    public Bootcamp(Long id, String name, Capability capability, Long capacity, User user, String url) {
+    public Bootcamp(Long id, String name, Capability capability, Long capacity, String url) {
         if (name.trim().isEmpty()){
             throw new EmptyFieldException(DomainConstants.Field.NAME.toString());
         }
         this.id = id;
         this.name = requireNonNull(name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
         this.capability = requireNonNull(capability, DomainConstants.FIELD_PROFILE_NULL_MESSAGE);
-        this.user = requireNonNull(user, DomainConstants.FIELD_USER_NULL_MESSAGE);
         this.urlMeet = requireNonNull(url, DomainConstants.FIELD_URL_NULL_MESSAGE);
     }
 
@@ -44,14 +42,6 @@ public class Bootcamp {
 
     public void setProfile(Capability capability) {
         this.capability = capability;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getUrlMeet() {

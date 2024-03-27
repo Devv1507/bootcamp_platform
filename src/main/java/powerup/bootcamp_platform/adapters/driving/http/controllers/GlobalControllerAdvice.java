@@ -67,13 +67,13 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler{
 
     */
 
-    @ExceptionHandler (value = { IllegalArgumentException.class, IllegalStateException.class })
+    /*@ExceptionHandler (value = { IllegalArgumentException.class, IllegalStateException.class })
     protected ResponseEntity<Object> unsupportedMediaTypeException(
             RuntimeException ex, WebRequest request) {
         String bodyOfResponse = Constants.METHOD_NOT_ALLOWED_EXCEPTION_MESSAGE; // needed some final fixs
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
-    }
+    }*/
 
 
     @ExceptionHandler(EmptyFieldException.class)

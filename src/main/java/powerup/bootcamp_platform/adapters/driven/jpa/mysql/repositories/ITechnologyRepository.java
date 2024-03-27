@@ -13,10 +13,16 @@ import org.springframework.data.domain.Pageable;
 import java.net.ContentHandler;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 public interface ITechnologyRepository extends JpaRepository<TechnologyEntity, Long> {
     Page<TechnologyEntity> findAll(Pageable pageable);
     Optional<TechnologyEntity> findByName(String name); // abstract method to apply to different models
+    List<TechnologyEntity> findTechnologiesByCapabilitiesId(Long capabilityId);
+
+    Set<TechnologyEntity> findAllByIdIn(List<Long> technologyIds);
+    Optional<TechnologyEntity> findById(Long id);
+
 
 }

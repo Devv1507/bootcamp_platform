@@ -14,8 +14,8 @@ public class CapabilityUseCase implements ICapabilityServicePort {
     }
 
     @Override
-    public void saveCapability(Capability capability) {
-        capabilityPersistentPort.saveCapability(capability);
+    public void saveCapability(Capability capability, List<Long> technologyIds) {
+        capabilityPersistentPort.saveCapability(capability, technologyIds);
     }
 
     @Override
@@ -37,4 +37,15 @@ public class CapabilityUseCase implements ICapabilityServicePort {
     public void deleteCapability(Long id) {
         capabilityPersistentPort.deleteCapability(id);
     }
+
+   @Override
+    public Capability assignTechnologyToCapability(Long capabilityId, Long technologyId) {
+        return capabilityPersistentPort.assignTechnologyToCapability(capabilityId, technologyId);
+    }
+
+
+    /*@Override
+    public void saveCapabilityByTechnologiesId(Long technologyId, Capability capability) {
+        capabilityPersistentPort.saveCapabilityByTechnologiesId(technologyId, capability);
+    }*/
 }

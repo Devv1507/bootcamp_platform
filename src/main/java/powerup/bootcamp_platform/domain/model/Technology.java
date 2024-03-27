@@ -6,16 +6,13 @@ public class Technology {
     /*@NotBlank(message = "Name is mandatory")*/
     private String name;
     private String description;
-    private String address;
-
-    public Technology(Long id, String name, String description, String address) {
+    public Technology(Long id, String name, String description) {
         /*if (description.trim().isEmpty()){
             throw new EmptyFieldException(DomainConstants.Field.DESCRIPTION.toString());
         }*/
         this.id = id;
         this.name = name;
         this.description = description;
-        this.address = address;
     }
 
     public Long getId() {
@@ -42,11 +39,4 @@ public class Technology {
         this.description = description;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

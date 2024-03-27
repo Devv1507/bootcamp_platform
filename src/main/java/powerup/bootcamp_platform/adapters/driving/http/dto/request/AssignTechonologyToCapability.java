@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class UpdateTechnologyRequest {
+public class AssignTechonologyToCapability {
     private final Long id;
     private final String name;
     private final String description;

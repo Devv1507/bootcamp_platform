@@ -1,16 +1,18 @@
 package powerup.bootcamp_platform.domain.model;
 
+import java.util.Set;
+
 public class Capability {
     private Long id;
     private String name;
     private String description;
-    private Technology technology;
+    private Set<Technology> technologies;
 
-    public Capability(Long id, String name, String description, Technology technology) {
+    public Capability(Long id, String name, String description, Set<Technology> technologies) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.technology = technology;
+        this.technologies = technologies;
     }
 
     public Long getId() {
@@ -37,11 +39,11 @@ public class Capability {
         this.description = description;
     }
 
-    public Technology getTechnology() {
-        return technology;
+    public Set<Technology> getTechnologies() {
+        return technologies;
     }
 
-    public void setTechnology(Technology technology) {
-        this.technology = technology;
+    public void setTechnologies(Set<Technology> technologies) {
+        this.technologies = technologies;
     }
 }

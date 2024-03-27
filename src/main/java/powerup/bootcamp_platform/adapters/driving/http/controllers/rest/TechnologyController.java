@@ -1,14 +1,5 @@
-package powerup.bootcamp_platform.adapters.driving.http.controllers;
+package powerup.bootcamp_platform.adapters.driving.http.controllers.rest;
 
-import org.apache.logging.log4j.message.Message;
-import org.springframework.core.annotation.Order;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
-import org.springframework.validation.annotation.Validated;
 import powerup.bootcamp_platform.adapters.driving.http.dto.request.AddTechnologyRequest;
 import powerup.bootcamp_platform.adapters.driving.http.dto.request.UpdateTechnologyRequest;
 import powerup.bootcamp_platform.adapters.driving.http.dto.response.TechnologyResponse;
@@ -27,17 +18,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import powerup.bootcamp_platform.domain.model.Technology;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/technologies")
 @RequiredArgsConstructor
-public class TechnologyRestControllerAdapter {
+public class TechnologyController {
     private final  ITechnologyServicePort technologyServicePort;
     private final ITechnologyRequestMapper technologyRequestMapper;
     private final ITechnologyResponseMapper technologyResponseMapper;

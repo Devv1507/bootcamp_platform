@@ -11,13 +11,13 @@ public interface ICapabilityEntityMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
-    @Mapping(source = "technology", target = "technologies")
+    @Mapping(source = "technologies", target = "technologies")
     CapabilityEntity toEntity(Capability capability);
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
-    @Mapping(source = "technologies", target = "technology")
-    Capability toModel(Capability capabilityEntity);
+    @Mapping(source = "technologies", target = "technologies")
+    Capability toModel(CapabilityEntity capabilityEntity);
 
     List<Capability> toModelList(List<CapabilityEntity> capabilityEntities);
 }
