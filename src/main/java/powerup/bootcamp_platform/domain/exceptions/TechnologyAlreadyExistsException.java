@@ -1,4 +1,4 @@
-package powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions;
+package powerup.bootcamp_platform.domain.exceptions;
 
 public class TechnologyAlreadyExistsException extends RuntimeException{
     public TechnologyAlreadyExistsException(){

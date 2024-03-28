@@ -1,9 +1,7 @@
 package powerup.bootcamp_platform.adapters.driving.http.controllers;
 
-import org.springframework.web.HttpMediaTypeNotSupportedException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.ElementNotFoundException;
 import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.NoDataFoundException;
-import powerup.bootcamp_platform.adapters.driven.jpa.mysql.exceptions.TechnologyAlreadyExistsException;
 import powerup.bootcamp_platform.configuration.Constants;
 import powerup.bootcamp_platform.domain.exceptions.EmptyFieldException;
 import powerup.bootcamp_platform.domain.exceptions.NegativeValuesException;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import lombok.RequiredArgsConstructor;
+import powerup.bootcamp_platform.domain.exceptions.TechnologyAlreadyExistsException;
 
 @RestControllerAdvice
 @ControllerAdvice

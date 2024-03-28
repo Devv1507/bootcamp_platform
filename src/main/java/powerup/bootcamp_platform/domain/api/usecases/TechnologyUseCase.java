@@ -1,5 +1,6 @@
 package powerup.bootcamp_platform.domain.api.usecases;
 
+import powerup.bootcamp_platform.domain.exceptions.TechnologyAlreadyExistsException;
 import powerup.bootcamp_platform.domain.model.Technology;
 import powerup.bootcamp_platform.domain.api.ITechnologyServicePort;
 import powerup.bootcamp_platform.domain.spi.ITechnologyPersistencePort;
@@ -12,7 +13,14 @@ public class TechnologyUseCase implements ITechnologyServicePort {
     }
     @Override
     public void saveTechnology(Technology technology) {
-        technologyPersistencePort.saveTechnology(technology);
+        try {
+            technologyPersistencePort.saveTechnology(technology);
+        } catch (TechnologyAlreadyExistsException exception) {
+            // Handle the exception (e.g., log, return error response)
+            // Example: throw new BusinessException("Technology already exists.");
+            // Alternatively, you can rethrow the same exception as a domain-specific exception.
+            throw exception;
+        }
     }
     @Override
     public Technology getTechnology(String name){
